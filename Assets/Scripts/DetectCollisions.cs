@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DetectCollisions : MonoBehaviour
 {
+    public GameObject gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        gameManager.GetComponent<GameManager>().UpdateCounts("addToScore");
+
         Destroy(gameObject);
         Destroy(other.gameObject);
     }

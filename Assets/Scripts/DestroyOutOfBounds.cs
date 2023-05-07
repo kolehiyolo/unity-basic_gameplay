@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    public float topBoundary;
-    public float lowerBoundary;
+    public float topBoundary =40;
+    public float lowerBoundary =-20;
+    public float leftBoundary =-40;
+    public float rightBoundary =40;
+
+    public GameObject gameManager;
+    // private UpdateCounts _updateCounts;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +26,18 @@ public class DestroyOutOfBounds : MonoBehaviour
             Destroy(gameObject);
         } else if (transform.position.z < lowerBoundary)
         {
-            Debug.Log("Game Over!");
+            destroyGameObject();
+        } else if (transform.position.x > rightBoundary)
+        {
+            destroyGameObject();
+        } else if (transform.position.x < leftBoundary)
+        {
+            destroyGameObject();
+        }
+
+        void destroyGameObject()
+        {
+            gameManager.GetComponent<GameManager>().UpdateCounts("reduceLife");
             Destroy(gameObject);
         }
     }
